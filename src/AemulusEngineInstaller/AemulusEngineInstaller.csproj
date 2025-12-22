@@ -1,0 +1,76 @@
+﻿<Project Sdk="WixToolset.Sdk/4.0.1">
+
+  <PropertyGroup>
+    <OutputType>Package</OutputType>
+    <Platform>x64</Platform>
+
+    <!-- Define source directory for engine files -->
+    <!-- For development/testing: Use TestEngineFiles (fast builds) -->
+    <SourceDir Condition="'$(SourceDir)' == ''">$(MSBuildProjectDirectory)\..\TestEngineFiles</SourceDir>
+
+    <!-- For production: Uncomment this line and comment out the line above -->
+    <!-- <SourceDir Condition="'$(SourceDir)' == ''">$(MSBuildProjectDirectory)\..\..\..\..\UEOculusDrop\LocalBuilds\Engine\Windows</SourceDir> -->
+  </PropertyGroup>
+
+  <!-- Define bind paths for WiX - Map preprocessor variables to actual directories -->
+  <ItemGroup>
+    <BindPath Include="$(SourceDir)">
+      <Name>SourceDir</Name>
+    </BindPath>
+    <BindPath Include="$(SourceDir)\Engine">
+      <Name>EngineDir</Name>
+    </BindPath>
+    <BindPath Include="$(SourceDir)\FeaturePacks">
+      <Name>FeaturePacksDir</Name>
+    </BindPath>
+    <BindPath Include="$(SourceDir)\Samples">
+      <Name>SamplesDir</Name>
+    </BindPath>
+    <BindPath Include="$(SourceDir)\Templates">
+      <Name>TemplatesDir</Name>
+    </BindPath>
+  </ItemGroup>
+
+  <!-- Define preprocessor variables for each subdirectory -->
+  <PropertyGroup>
+    <DefineConstants>SourceDir=$(SourceDir);EngineDir=$(SourceDir)\Engine;FeaturePacksDir=$(SourceDir)\FeaturePacks;SamplesDir=$(SourceDir)\Samples;TemplatesDir=$(SourceDir)\Templates</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WixToolset.Heat" Version="6.0.2" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.1" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.1" />
+  </ItemGroup>
+
+  <!-- Heat: Harvest engine files automatically -->
+  <ItemGroup>
+    <HarvestDirectory Include="$(SourceDir)\Engine">
+      <DirectoryRefId>EngineFolder</DirectoryRefId>
+      <ComponentGroupName>EngineComponents</ComponentGroupName>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+      <PreprocessorVariable>var.EngineDir</PreprocessorVariable>
+    </HarvestDirectory>
+
+    <HarvestDirectory Include="$(SourceDir)\FeaturePacks">
+      <DirectoryRefId>FeaturePacksFolder</DirectoryRefId>
+      <ComponentGroupName>FeaturePacksComponents</ComponentGroupName>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+      <PreprocessorVariable>var.FeaturePacksDir</PreprocessorVariable>
+    </HarvestDirectory>
+
+    <HarvestDirectory Include="$(SourceDir)\Samples">
+      <DirectoryRefId>SamplesFolder</DirectoryRefId>
+      <ComponentGroupName>SamplesComponents</ComponentGroupName>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+      <PreprocessorVariable>var.SamplesDir</PreprocessorVariable>
+    </HarvestDirectory>
+
+    <HarvestDirectory Include="$(SourceDir)\Templates">
+      <DirectoryRefId>TemplatesFolder</DirectoryRefId>
+      <ComponentGroupName>TemplatesComponents</ComponentGroupName>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+      <PreprocessorVariable>var.TemplatesDir</PreprocessorVariable>
+    </HarvestDirectory>
+  </ItemGroup>
+
+</Project>

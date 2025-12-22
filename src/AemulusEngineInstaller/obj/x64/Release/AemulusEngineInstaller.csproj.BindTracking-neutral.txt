@@ -1,0 +1,17 @@
+BuiltPdbOutput	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\AemulusEngineInstaller.wixpdb
+BuiltTargetOutput	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\AemulusEngineInstaller.msi
+Input	C:\Users\scott\.nuget\packages\wixtoolset.ui.wixext\4.0.1\wixext4\WixToolset.UI.wixext.dll
+Input	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\..\TestEngineFiles\Engine\Binaries\Win64\UnrealEditor.exe
+Input	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\..\TestEngineFiles\Engine\test_engine_file.txt
+Input	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\..\TestEngineFiles\FeaturePacks\test_featurepack.txt
+Input	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\..\TestEngineFiles\Samples\test_sample.txt
+Input	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\..\TestEngineFiles\Templates\test_template.txt
+Intermediate	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\#AemulusEngine.cab
+Intermediate	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\WixToolset.UI.wixext_VvshZJjX7UtisrkHN87ALeMtqNQ\wix-ir\bannrbmp.bmp
+Intermediate	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\WixToolset.UI.wixext_VvshZJjX7UtisrkHN87ALeMtqNQ\wix-ir\dlgbmp.bmp
+Intermediate	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\WixToolset.UI.wixext_VvshZJjX7UtisrkHN87ALeMtqNQ\wix-ir\exclamic.ico
+Intermediate	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\WixToolset.UI.wixext_VvshZJjX7UtisrkHN87ALeMtqNQ\wix-ir\info.ico
+Intermediate	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\WixToolset.UI.wixext_VvshZJjX7UtisrkHN87ALeMtqNQ\wix-ir\license.rtf
+Intermediate	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\WixToolset.UI.wixext_VvshZJjX7UtisrkHN87ALeMtqNQ\wix-ir\new.ico
+Intermediate	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\WixToolset.UI.wixext_VvshZJjX7UtisrkHN87ALeMtqNQ\wix-ir\uica.dll-1
+Intermediate	E:\1\GitRepos\Aemulus-XR\EngineInstaller\src\AemulusEngineInstaller\obj\x64\Release\WixToolset.UI.wixext_VvshZJjX7UtisrkHN87ALeMtqNQ\wix-ir\up.ico

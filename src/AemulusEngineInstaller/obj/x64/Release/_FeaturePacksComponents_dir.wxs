@@ -1,0 +1,14 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="FeaturePacksFolder">
+            <Component Id="cmpIvFh9QWn5jQrN3ArRwoL2KlJj9U" Guid="*">
+                <File Id="fil629gV6bDGPFzQgCuTTIhICL_Vo0" KeyPath="yes" Source="$(var.FeaturePacksDir)\test_featurepack.txt" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="FeaturePacksComponents">
+            <ComponentRef Id="cmpIvFh9QWn5jQrN3ArRwoL2KlJj9U" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

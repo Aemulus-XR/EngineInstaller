@@ -1,0 +1,14 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="TemplatesFolder">
+            <Component Id="cmpaz3ijmbgU.XsHb1KuvidOw.5A9c" Guid="*">
+                <File Id="filOaoGTfHFkEwOUPzyuUpisFRmJjk" KeyPath="yes" Source="$(var.TemplatesDir)\test_template.txt" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="TemplatesComponents">
+            <ComponentRef Id="cmpaz3ijmbgU.XsHb1KuvidOw.5A9c" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

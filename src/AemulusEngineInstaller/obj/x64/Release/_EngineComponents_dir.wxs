@@ -1,0 +1,22 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="EngineFolder">
+            <Component Id="cmpp9ab5G5ka5E1zZ2AcZssuFnR2yE" Guid="*">
+                <File Id="filLcf9kaU24PX_QF2FXQZHEBWvV1w" KeyPath="yes" Source="$(var.EngineDir)\test_engine_file.txt" />
+            </Component>
+            <Directory Id="dir5PXgkiS1k19xhdV3PzMhxTdUuow" Name="Binaries">
+                <Directory Id="dirKZWGfNE7HTOo_02BqElSfdLv2Hg" Name="Win64">
+                    <Component Id="cmpiHOp6fRSBLy3nL9AzWKDZPw4Cdg" Guid="*">
+                        <File Id="filW9FMwCfh.X3sO5vMyPqXE42G2sY" KeyPath="yes" Source="$(var.EngineDir)\Binaries\Win64\UnrealEditor.exe" />
+                    </Component>
+                </Directory>
+            </Directory>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="EngineComponents">
+            <ComponentRef Id="cmpp9ab5G5ka5E1zZ2AcZssuFnR2yE" />
+            <ComponentRef Id="cmpiHOp6fRSBLy3nL9AzWKDZPw4Cdg" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

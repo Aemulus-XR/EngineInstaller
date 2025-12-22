@@ -1,0 +1,216 @@
+{
+  "version": 3,
+  "targets": {
+    "native,Version=v0.0": {
+      "WixToolset.Heat/6.0.2": {
+        "type": "package",
+        "build": {
+          "build/WixToolset.Heat.targets": {}
+        }
+      },
+      "WixToolset.UI.wixext/4.0.1": {
+        "type": "package",
+        "build": {
+          "build/WixToolset.UI.wixext.targets": {}
+        }
+      },
+      "WixToolset.Util.wixext/4.0.1": {
+        "type": "package",
+        "build": {
+          "build/WixToolset.Util.wixext.targets": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WixToolset.Heat/6.0.2": {
+      "sha512": "tR0KHcNysmhBByYNVE4mvY/bxk0Fe+hpycI8KtOT3ioWGFXvXerWdLORLDNR/PESBfuQDckqJCA+AFw4t3KIFA==",
+      "type": "package",
+      "path": "wixtoolset.heat/6.0.2",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "OSMFEULA.txt",
+        "README.md",
+        "build/WixToolset.Heat.targets",
+        "icon.png",
+        "tools/net472/WixToolset.HeatTasks.dll",
+        "tools/net472/x64/Microsoft.Win32.Registry.dll",
+        "tools/net472/x64/System.Buffers.dll",
+        "tools/net472/x64/System.Configuration.ConfigurationManager.dll",
+        "tools/net472/x64/System.Diagnostics.PerformanceCounter.dll",
+        "tools/net472/x64/System.IO.FileSystem.AccessControl.dll",
+        "tools/net472/x64/System.Memory.dll",
+        "tools/net472/x64/System.Numerics.Vectors.dll",
+        "tools/net472/x64/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/net472/x64/System.Security.AccessControl.dll",
+        "tools/net472/x64/System.Security.Permissions.dll",
+        "tools/net472/x64/System.Security.Principal.Windows.dll",
+        "tools/net472/x64/System.Text.Encoding.CodePages.dll",
+        "tools/net472/x64/WixToolset.Core.dll",
+        "tools/net472/x64/WixToolset.Data.dll",
+        "tools/net472/x64/WixToolset.Extensibility.dll",
+        "tools/net472/x64/WixToolset.Versioning.dll",
+        "tools/net472/x64/heat.exe",
+        "tools/net472/x64/heat.exe.config",
+        "tools/net472/x86/Microsoft.Win32.Registry.dll",
+        "tools/net472/x86/System.Buffers.dll",
+        "tools/net472/x86/System.Configuration.ConfigurationManager.dll",
+        "tools/net472/x86/System.Diagnostics.PerformanceCounter.dll",
+        "tools/net472/x86/System.IO.FileSystem.AccessControl.dll",
+        "tools/net472/x86/System.Memory.dll",
+        "tools/net472/x86/System.Numerics.Vectors.dll",
+        "tools/net472/x86/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/net472/x86/System.Security.AccessControl.dll",
+        "tools/net472/x86/System.Security.Permissions.dll",
+        "tools/net472/x86/System.Security.Principal.Windows.dll",
+        "tools/net472/x86/System.Text.Encoding.CodePages.dll",
+        "tools/net472/x86/WixToolset.Core.dll",
+        "tools/net472/x86/WixToolset.Data.dll",
+        "tools/net472/x86/WixToolset.Extensibility.dll",
+        "tools/net472/x86/WixToolset.Versioning.dll",
+        "tools/net472/x86/heat.exe",
+        "tools/net472/x86/heat.exe.config",
+        "tools/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "tools/net6.0/System.Configuration.ConfigurationManager.dll",
+        "tools/net6.0/System.Diagnostics.PerformanceCounter.dll",
+        "tools/net6.0/System.DirectoryServices.dll",
+        "tools/net6.0/System.Drawing.Common.dll",
+        "tools/net6.0/System.Reflection.Metadata.dll",
+        "tools/net6.0/System.Security.Cryptography.ProtectedData.dll",
+        "tools/net6.0/System.Security.Permissions.dll",
+        "tools/net6.0/System.Text.Encoding.CodePages.dll",
+        "tools/net6.0/System.Windows.Extensions.dll",
+        "tools/net6.0/WixToolset.Core.dll",
+        "tools/net6.0/WixToolset.Data.dll",
+        "tools/net6.0/WixToolset.Extensibility.dll",
+        "tools/net6.0/WixToolset.HeatTasks.deps.json",
+        "tools/net6.0/WixToolset.HeatTasks.dll",
+        "tools/net6.0/WixToolset.Versioning.dll",
+        "tools/net6.0/heat.deps.json",
+        "tools/net6.0/heat.dll",
+        "tools/net6.0/heat.dll.config",
+        "tools/net6.0/heat.runtimeconfig.json",
+        "tools/net6.0/runtimes/unix/lib/net6.0/System.Drawing.Common.dll",
+        "tools/net6.0/runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "tools/net6.0/runtimes/win/lib/net6.0/System.Diagnostics.PerformanceCounter.dll",
+        "tools/net6.0/runtimes/win/lib/net6.0/System.DirectoryServices.dll",
+        "tools/net6.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll",
+        "tools/net6.0/runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll",
+        "tools/net6.0/runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll",
+        "tools/net6.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll",
+        "wixtoolset.heat.6.0.2.nupkg.sha512",
+        "wixtoolset.heat.nuspec"
+      ]
+    },
+    "WixToolset.UI.wixext/4.0.1": {
+      "sha512": "6gaClEIItYlULf4l6GPgFaQsiTVkez9GI8el9W//bGBgEsHU7HzUzyiroFQ/yjSWMx9x5eIvSzaK0Qh7Kyw59Q==",
+      "type": "package",
+      "path": "wixtoolset.ui.wixext/4.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/WixToolset.UI.wixext.targets",
+        "wix.png",
+        "wixext4/WixToolset.UI.wixext.dll",
+        "wixtoolset.ui.wixext.4.0.1.nupkg.sha512",
+        "wixtoolset.ui.wixext.nuspec"
+      ]
+    },
+    "WixToolset.Util.wixext/4.0.1": {
+      "sha512": "IaV1w7pHIZtQ7HYS1GWvvVY7hbpJHc9EhxtL/j/LK/RR1K0Xctb3dxm4Xpa6Q3kJinDVIHQB4UBR2J9jH0eciw==",
+      "type": "package",
+      "path": "wixtoolset.util.wixext/4.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/WixToolset.Util.wixext.targets",
+        "wix.png",
+        "wixext4/WixToolset.Util.wixext.dll",
+        "wixtoolset.util.wixext.4.0.1.nupkg.sha512",
+        "wixtoolset.util.wixext.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "native,Version=v0.0": [
+      "WixToolset.Heat >= 6.0.2",
+      "WixToolset.UI.wixext >= 4.0.1",
+      "WixToolset.Util.wixext >= 4.0.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\scott\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\1\\GitRepos\\Aemulus-XR\\EngineInstaller\\src\\AemulusEngineInstaller\\AemulusEngineInstaller.csproj",
+      "projectName": "AemulusEngineInstaller",
+      "projectPath": "E:\\1\\GitRepos\\Aemulus-XR\\EngineInstaller\\src\\AemulusEngineInstaller\\AemulusEngineInstaller.csproj",
+      "packagesPath": "C:\\Users\\scott\\.nuget\\packages\\",
+      "outputPath": "E:\\1\\GitRepos\\Aemulus-XR\\EngineInstaller\\src\\AemulusEngineInstaller\\obj\\",
+      "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\scott\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "native"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "native": {
+          "targetAlias": "native",
+          "projectReferences": {}
+        }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "native": {
+        "targetAlias": "native",
+        "dependencies": {
+          "WixToolset.Heat": {
+            "target": "Package",
+            "version": "[6.0.2, )"
+          },
+          "WixToolset.UI.wixext": {
+            "target": "Package",
+            "version": "[4.0.1, )"
+          },
+          "WixToolset.Util.wixext": {
+            "target": "Package",
+            "version": "[4.0.1, )"
+          }
+        }
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'WixToolset.Util.wixext' 4.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-jx4p-m4wm-vvjg",
+      "libraryId": "WixToolset.Util.wixext",
+      "targetGraphs": [
+        "native,Version=v0.0"
+      ]
+    }
+  ]
+}
