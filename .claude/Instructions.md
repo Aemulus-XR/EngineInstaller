@@ -128,5 +128,32 @@ Each harvest uses:
 3. **Watch for errors**: Path length, file locks, permissions
 4. **Test in VM first**: Don't test on your development machine initially
 
+## Phase 2: Installer Redesign (Pending)
+
+**Hybrid Approach Adopted**: After discovering that packaging 290,226 files into a monolithic MSI takes 30+ minutes and produces a massive installer, we pivoted to a hybrid approach:
+
+1. **Small WiX Installer** (~10-15MB) - Lightweight bootstrapper
+2. **7z Archive** (19GB) - Hosted on Dropbox with direct download
+
+The installer needs to be converted from a monolithic MSI to a lightweight bootstrapper:
+- Remove Heat harvesting configuration
+- Add download functionality (PowerShell Invoke-WebRequest or WiX custom action)
+- Embed 7za.exe (~1.5MB) - **7-Zip is NOT pre-installed on Windows 10/11**
+- Add 7z extraction using embedded 7za.exe
+- Create progress UI for download and extraction
+- Handle errors gracefully (download failures, disk space, extraction errors)
+
+**7-Zip Considerations:**
+- 7-Zip is NOT included with Windows 10/11
+- We will embed 7za.exe (standalone console version, ~1.5MB)
+- Download from: https://www.7-zip.org/download.html (look for "7-Zip Extra" package)
+- Extract 7za.exe and include as embedded resource in installer
+- Use 7za.exe to extract the downloaded archive during installation
+
+**Distribution Platform**: Dropbox (2TB paid account)
+- Archive: 19GB compressed (from ~30-40GB source)
+- Direct download URL format: `https://www.dropbox.com/scl/fi/XXXXX/UE_5.6_OculusDrop.7z?rlkey=XXXXX&dl=1`
+- No download quotas, reliable for team distribution
+
 ## Notes
 (Add ongoing notes, decisions, and important context here)

@@ -27,15 +27,21 @@ Instead of packaging 290,000 files directly into an MSI (which is taking 30+ min
 ### Part 1: WiX Installer (This Project)
 **Contains:**
 - Installation wizard UI
+- Embedded 7za.exe (~1.5MB standalone) - since 7-Zip is NOT pre-installed on Windows
 - Custom actions to:
-  - Download 7z archive from Google Drive
-  - Extract using 7z.exe (embedded in installer)
+  - Download 7z archive from Dropbox
+  - Extract using embedded 7za.exe
   - Create shortcuts
   - Register installation path
   - Handle cleanup on uninstall
 
 **Doesn't contain:**
 - The actual engine files (those are in the 7z archive)
+
+**Note on 7-Zip:**
+- 7-Zip is NOT pre-installed on Windows 10/11
+- We embed 7za.exe (standalone console version) in the installer
+- Alternative: Use .NET compression libraries, but 7za.exe is simpler and proven
 
 ### Part 2: 7-Zip Archive
 **Created separately:**

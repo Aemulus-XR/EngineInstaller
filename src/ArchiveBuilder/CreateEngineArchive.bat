@@ -15,11 +15,13 @@ echo Aemulus-XR Engine Archive Builder
 echo ========================================
 echo.
 
-REM Get script directory
+REM Get script directory and change to it for consistent relative paths
 set SCRIPT_DIR=%~dp0
+cd /d "%SCRIPT_DIR%"
 
-REM Define paths
-set ENGINE_SOURCE=..\..\..\..\UEOculusDrop\LocalBuilds\Engine\Windows
+REM Define paths (from ArchiveBuilder to UEOculusDrop)
+REM Path: EngineInstaller/src/ArchiveBuilder -> ../../../UEOculusDrop
+set ENGINE_SOURCE=..\..\..\UEOculusDrop\LocalBuilds\Engine\Windows
 set OUTPUT_DIR=%SCRIPT_DIR%Output
 set ARCHIVE_NAME=UE_5.6_OculusDrop.7z
 set LOG_FILE=%SCRIPT_DIR%archive_build.log
