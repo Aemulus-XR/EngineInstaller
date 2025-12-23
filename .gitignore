@@ -36,3 +36,9 @@ src/TestEngineFiles/**/*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Claude Code local settings (user-specific)
+.claude/settings.local.json
+
+# Obsidian workspace (user-specific)
+.obsidian/workspace.json
