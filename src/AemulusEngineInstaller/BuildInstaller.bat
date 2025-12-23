@@ -7,8 +7,15 @@ echo Aemulus-XR UE 5.6 Installer Build Script
 echo ========================================
 echo.
 
+REM Get the directory where this batch file is located
+set SCRIPT_DIR=%~dp0
+
+REM Change to the script directory so relative paths work correctly
+cd /d "%SCRIPT_DIR%"
+
 REM Set the source directory (where the engine files are)
-set SOURCE_DIR=..\..\..\..\..\UEOculusDrop\LocalBuilds\Engine\Windows
+REM Path from EngineInstaller/src/AemulusEngineInstaller to UEOculusDrop/LocalBuilds/Engine/Windows
+set SOURCE_DIR=..\..\..\UEOculusDrop\LocalBuilds\Engine\Windows
 
 REM Check if source directory exists
 if not exist "%SOURCE_DIR%" (
@@ -27,10 +34,20 @@ REM Set the SourceDir variable for WiX
 set SourceDir=%SOURCE_DIR%
 
 echo Building installer...
+echo This will take 5-15 minutes for the full engine build...
+echo Output will be logged to: build.log
+echo Verbosity: Normal (shows progress)
+echo.
+echo Starting build at %TIME%...
 echo.
 
-REM Build the MSI package
-dotnet build -c Release
+REM Build the MSI package with verbose output
+REM -v:n = normal verbosity (shows progress)
+REM Can use -v:d for detailed or -v:diag for diagnostic
+dotnet build -c Release -v:n > build.log 2>&1
+
+REM Also display the log file contents to console
+type build.log
 
 if %ERRORLEVEL% NEQ 0 (
     echo.
@@ -43,7 +60,7 @@ echo.
 echo ========================================
 echo Build completed successfully!
 echo.
-echo Output: bin\Release\net9.0\en-US\AemulusEngineInstaller.msi
+echo Output: bin\x64\Release\AemulusEngineInstaller.msi
 echo ========================================
 echo.
 

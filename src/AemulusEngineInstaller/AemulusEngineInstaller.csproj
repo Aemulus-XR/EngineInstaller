@@ -6,10 +6,10 @@
 
     <!-- Define source directory for engine files -->
     <!-- For development/testing: Use TestEngineFiles (fast builds) -->
-    <SourceDir Condition="'$(SourceDir)' == ''">$(MSBuildProjectDirectory)\..\TestEngineFiles</SourceDir>
+    <!-- <SourceDir Condition="'$(SourceDir)' == ''">$(MSBuildProjectDirectory)\..\TestEngineFiles</SourceDir> -->
 
-    <!-- For production: Uncomment this line and comment out the line above -->
-    <!-- <SourceDir Condition="'$(SourceDir)' == ''">$(MSBuildProjectDirectory)\..\..\..\..\UEOculusDrop\LocalBuilds\Engine\Windows</SourceDir> -->
+    <!-- For production: Using real engine build -->
+    <SourceDir Condition="'$(SourceDir)' == ''">$(MSBuildProjectDirectory)\..\..\..\UEOculusDrop\LocalBuilds\Engine\Windows</SourceDir>
   </PropertyGroup>
 
   <!-- Define bind paths for WiX - Map preprocessor variables to actual directories -->

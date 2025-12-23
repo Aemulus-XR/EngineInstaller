@@ -98,5 +98,35 @@ Each harvest uses:
 
 > **Important**: The UpgradeCode must remain constant across all versions to enable upgrade-in-place functionality!
 
+## Potential Issues with Large Engine Builds
+
+### Path Length Issues
+- **Windows MAX_PATH limit**: 260 characters
+- **WiX v4**: Better handling than v3, but still potential issues
+- **Mitigation**: WiX uses short file names in MSI tables, but long paths can still cause problems during build
+- **Solution**: If path length errors occur, consider using shorter build output paths or Windows Long Path support
+
+### Build Performance
+- **Heat harvesting**: Will scan thousands of files (10,000+ in full UE build)
+- **Expected build time**: 2-10 minutes for full engine (vs seconds for test files)
+- **Memory usage**: Can spike during component generation
+- **MSI size**: Expect 8-15 GB for full engine installation
+
+### File Count Issues
+- **Windows Installer limit**: 32,767 files per component (we should be under this)
+- **Cabinet file size**: Single CAB file can be very large (8+ GB)
+- **Compression time**: CAB compression is slow for large builds
+
+### Known WiX Issues
+- **Heat deprecation warning**: Expected (HEAT5149) - Heat is deprecated in WiX v7
+- **Assembly harvest warnings**: Expected for non-.NET executables (HEAT5151)
+- **Security vulnerabilities**: WiX 4.0.1 has known vulns - consider updating to latest 4.x when available
+
+### Recommendations for First Production Build
+1. **Increase build timeout**: May need 10-15 minutes
+2. **Close other applications**: Free up memory
+3. **Watch for errors**: Path length, file locks, permissions
+4. **Test in VM first**: Don't test on your development machine initially
+
 ## Notes
 (Add ongoing notes, decisions, and important context here)

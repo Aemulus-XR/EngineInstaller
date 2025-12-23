@@ -1,0 +1,38 @@
+# Build outputs
+bin/
+obj/
+*.msi
+*.wixpdb
+*.wixobj
+*.cab
+
+# Build logs
+build.log
+*.log
+
+# Archive builder outputs
+src/ArchiveBuilder/Output/
+src/ArchiveBuilder/*.7z
+src/ArchiveBuilder/archive_build.log
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# NuGet
+packages/
+*.nupkg
+
+# Test files (keep the folder structure but not binaries)
+src/TestEngineFiles/**/*
+!src/TestEngineFiles/README.md
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# OS files
+.DS_Store
+Thumbs.db
