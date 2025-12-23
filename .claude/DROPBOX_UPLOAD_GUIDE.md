@@ -38,7 +38,7 @@ https://www.dropbox.com/scl/fi/XXXXX/UE_5.6_OculusDrop.7z?rlkey=XXXXX&dl=1
 ### Step 5: Save the URL
 Once confirmed working, save the URL to:
 ```
-EngineInstaller/src/AemulusEngineInstaller/DownloadConfig.txt
+EngineInstaller/src/EngineInstaller/DownloadConfig.txt
 ```
 
 This will be used by the installer in Phase 2.

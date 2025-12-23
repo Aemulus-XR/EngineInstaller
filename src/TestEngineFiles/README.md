@@ -29,13 +29,13 @@ TestEngineFiles/
 ## Switching Between Test and Production
 
 ### Development Mode (Current)
-In `AemulusEngineInstaller.csproj`, line 9 points to TestEngineFiles:
+In `EngineInstaller.csproj`, line 9 points to TestEngineFiles:
 ```xml
 <SourceDir Condition="'$(SourceDir)' == ''">$(MSBuildProjectDirectory)\..\TestEngineFiles</SourceDir>
 ```
 
 ### Production Mode
-To build with the real engine files, edit `AemulusEngineInstaller.csproj`:
+To build with the real engine files, edit `EngineInstaller.csproj`:
 1. Comment out line 9 (TestEngineFiles)
 2. Uncomment line 12 (production path)
 

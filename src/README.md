@@ -12,9 +12,9 @@ This directory contains the WiX-based installer project for the Aemulus-XR Unrea
 
 ```
 src/
-├── AemulusEngineInstaller/          # WiX installer project
+├── EngineInstaller/          # WiX installer project
 │   ├── Package.wxs                   # Main WiX source file
-│   ├── AemulusEngineInstaller.csproj # MSBuild project file
+│   ├── EngineInstaller.csproj # MSBuild project file
 │   └── BuildInstaller.bat            # Build script
 └── README.md                         # This file
 ```
@@ -37,14 +37,14 @@ This will generate the engine files in `UEOculusDrop/LocalBuilds/Engine/Windows/
 Run the build script:
 
 ```batch
-cd EngineInstaller\src\AemulusEngineInstaller
+cd EngineInstaller\src\EngineInstaller
 BuildInstaller.bat
 ```
 
 Or build manually:
 
 ```batch
-cd EngineInstaller\src\AemulusEngineInstaller
+cd EngineInstaller\src\EngineInstaller
 dotnet build -c Release
 ```
 
@@ -52,7 +52,7 @@ dotnet build -c Release
 
 The installer MSI will be created at:
 ```
-src/AemulusEngineInstaller/bin/Release/net9.0/en-US/AemulusEngineInstaller.msi
+src/EngineInstaller/bin/Release/net9.0/en-US/EngineInstaller.msi
 ```
 
 ## Installer Features

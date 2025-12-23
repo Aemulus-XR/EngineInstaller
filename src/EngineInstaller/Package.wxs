@@ -4,7 +4,7 @@
 
   <!-- Product Definition -->
   <Package
-    Name="Aemulus-XR Unreal Engine 5.6 OculusDrop"
+    Name="Unreal Engine 5.6 OculusDrop"
     Manufacturer="Aemulus-XR"
     Version="5.6.0.0"
     UpgradeCode="12345678-1234-1234-1234-123456789012"
@@ -15,7 +15,7 @@
 
     <SummaryInformation
       Keywords="Installer"
-      Description="Aemulus-XR Unreal Engine 5.6 OculusDrop Edition"
+      Description="Unreal Engine 5.6 OculusDrop Edition"
       Manufacturer="Aemulus-XR" />
 
     <!-- Upgrade logic - upgrade in place -->
@@ -27,7 +27,7 @@
     <Launch Condition="VersionNT64" Message="This application requires a 64-bit operating system." />
 
     <!-- Media definition -->
-    <Media Id="1" Cabinet="AemulusEngine.cab" EmbedCab="yes" />
+    <Media Id="1" Cabinet="Engine.cab" EmbedCab="yes" />
 
     <!-- Icon for Add/Remove Programs -->
     <!-- TODO: Re-enable once file path mapping is working -->
@@ -56,7 +56,7 @@
 
     <!-- Start Menu folder -->
     <StandardDirectory Id="ProgramMenuFolder">
-      <Directory Id="ApplicationProgramsFolder" Name="Aemulus-XR Unreal Engine 5.6" />
+      <Directory Id="ApplicationProgramsFolder" Name="Unreal Engine 5.6" />
     </StandardDirectory>
 
     <!-- Main application component -->
@@ -67,7 +67,7 @@
         Id="StartMenuShortcut"
         Directory="ApplicationProgramsFolder"
         Name="Unreal Editor 5.6"
-        Description="Aemulus-XR Unreal Engine 5.6 OculusDrop Edition"
+        Description="Unreal Engine 5.6 OculusDrop Edition"
         Target="[Win64Folder]UnrealEditor.exe"
         WorkingDirectory="INSTALLFOLDER" />
 
@@ -76,7 +76,7 @@
         Id="DesktopShortcut"
         Directory="DesktopFolder"
         Name="Unreal Editor 5.6"
-        Description="Aemulus-XR Unreal Engine 5.6 OculusDrop Edition"
+        Description="Unreal Engine 5.6 OculusDrop Edition"
         Target="[Win64Folder]UnrealEditor.exe"
         WorkingDirectory="INSTALLFOLDER" />
 
@@ -103,7 +103,7 @@
     </Component>
 
     <!-- Feature definition -->
-    <Feature Id="ProductFeature" Title="Aemulus-XR Unreal Engine 5.6" Level="1">
+    <Feature Id="ProductFeature" Title="Unreal Engine 5.6" Level="1">
       <ComponentRef Id="UnrealEditorShortcuts" />
       <!-- Heat-generated component groups -->
       <ComponentGroupRef Id="EngineComponents" />

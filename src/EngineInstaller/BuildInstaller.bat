@@ -1,9 +1,9 @@
 @echo off
-REM Build script for Aemulus-XR Unreal Engine Installer
+REM Build script for Unreal Engine Installer
 REM This script builds the WiX installer MSI package
 
 echo ========================================
-echo Aemulus-XR UE 5.6 Installer Build Script
+echo UE 5.6 Installer Build Script
 echo ========================================
 echo.
 
@@ -14,7 +14,7 @@ REM Change to the script directory so relative paths work correctly
 cd /d "%SCRIPT_DIR%"
 
 REM Set the source directory (where the engine files are)
-REM Path from EngineInstaller/src/AemulusEngineInstaller to UEOculusDrop/LocalBuilds/Engine/Windows
+REM Path from EngineInstaller/src/EngineInstaller to UEOculusDrop/LocalBuilds/Engine/Windows
 set SOURCE_DIR=..\..\..\UEOculusDrop\LocalBuilds\Engine\Windows
 
 REM Check if source directory exists
@@ -60,7 +60,7 @@ echo.
 echo ========================================
 echo Build completed successfully!
 echo.
-echo Output: bin\x64\Release\AemulusEngineInstaller.msi
+echo Output: bin\x64\Release\EngineInstaller.msi
 echo ========================================
 echo.
 

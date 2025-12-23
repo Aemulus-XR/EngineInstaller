@@ -25,7 +25,7 @@ WiX compiler processes the harvested files.
 Creates the MSI and embeds all files in a cabinet file.
 - **Duration**: 2-5 minutes
 - **Disk I/O**: Heavy - reading all source files and compressing
-- **Output**: AemulusEngineInstaller.msi in bin/x64/Release/
+- **Output**: EngineInstaller.msi in bin/x64/Release/
 
 ## Potential Issues & Solutions
 
@@ -58,7 +58,7 @@ Creates the MSI and embeds all files in a cabinet file.
 ## Build Command
 
 ```batch
-cd EngineInstaller\src\AemulusEngineInstaller
+cd EngineInstaller\src\EngineInstaller
 dotnet build -c Release
 ```
 
@@ -70,7 +70,7 @@ BuildInstaller.bat
 ## Output Location
 
 ```
-EngineInstaller/src/AemulusEngineInstaller/bin/x64/Release/AemulusEngineInstaller.msi
+EngineInstaller/src/EngineInstaller/bin/x64/Release/EngineInstaller.msi
 ```
 
 ## Testing the Installer

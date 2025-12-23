@@ -41,7 +41,7 @@ This will:
 ## Update Installer
 
 After uploading, update the installer with the download URL:
-- Edit `../AemulusEngineInstaller/DownloadConfig.xml` (or wherever URL is stored)
+- Edit `../EngineInstaller/DownloadConfig.xml` (or wherever URL is stored)
 - Update version number if needed
 
 ## Files Excluded from Archive

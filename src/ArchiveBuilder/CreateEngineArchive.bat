@@ -1,6 +1,6 @@
 @echo off
 REM ========================================
-REM Aemulus-XR Engine Archive Builder
+REM Engine Archive Builder
 REM ========================================
 REM This script:
 REM 1. Cleans the engine build folder (removes temp/cache files)
@@ -11,7 +11,7 @@ REM ========================================
 setlocal enabledelayedexpansion
 
 echo ========================================
-echo Aemulus-XR Engine Archive Builder
+echo Engine Archive Builder
 echo ========================================
 echo.
 
@@ -124,7 +124,65 @@ echo End time: %TIME%
 echo.
 
 REM ========================================
-REM Step 3: Report results
+REM Step 3: Verify archive contents
+REM ========================================
+echo Step 3: Verifying archive contents...
+echo ----------------------------------------
+echo Counting files in source directory...
+echo.
+
+REM Count files in source
+for /f %%A in ('dir "%ENGINE_SOURCE%" /s /a-d /b 2^>nul ^| find /c /v ""') do set SOURCE_COUNT=%%A
+echo Source file count: %SOURCE_COUNT%
+echo.
+
+echo Testing archive and counting files...
+echo (This may take a few minutes...)
+echo.
+
+REM Test archive and count files
+REM 7z l lists contents, we count non-header lines
+for /f %%A in ('7z l "%OUTPUT_DIR%\%ARCHIVE_NAME%" -slt ^| find "Path = " ^| find /c /v ""') do set ARCHIVE_COUNT=%%A
+
+echo Archive file count: %ARCHIVE_COUNT%
+echo.
+
+REM Compare counts (allow small difference for archive metadata)
+set /a DIFF=%SOURCE_COUNT%-%ARCHIVE_COUNT%
+if %DIFF% LSS 0 set /a DIFF=-%DIFF%
+
+if %DIFF% GTR 10 (
+    echo.
+    echo WARNING: File count mismatch!
+    echo Source has %SOURCE_COUNT% files
+    echo Archive has %ARCHIVE_COUNT% files
+    echo Difference: %DIFF% files
+    echo.
+    echo This could indicate missing files. Please investigate.
+    echo.
+    pause
+) else (
+    echo File count verification PASSED
+    echo Difference: %DIFF% files (within acceptable range)
+    echo.
+)
+
+REM Test archive integrity
+echo Testing archive integrity...
+7z t "%OUTPUT_DIR%\%ARCHIVE_NAME%" > nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    echo.
+    echo ERROR: Archive integrity test FAILED!
+    echo The archive may be corrupted.
+    pause
+    exit /b 1
+) else (
+    echo Archive integrity test PASSED
+    echo.
+)
+
+REM ========================================
+REM Step 4: Report results
 REM ========================================
 echo ========================================
 echo Archive Created Successfully!
@@ -144,15 +202,13 @@ echo.
 echo ========================================
 echo Next Steps:
 echo ========================================
-echo 1. Upload %ARCHIVE_NAME% to Google Drive
+echo 1. Upload %ARCHIVE_NAME% to Dropbox
 echo 2. Share with "Anyone with the link"
-echo 3. Get the direct download link:
-echo    - Right-click file in Google Drive
-echo    - Get link
-echo    - Change sharing to "Anyone with the link"
-echo    - Copy the file ID from the URL
-echo    - Use format: https://drive.google.com/uc?export=download^&id=FILE_ID
-echo 4. Update installer with download URL
+echo 3. Get the direct download link and change ?dl=0 to ?dl=1
+echo 4. Test the direct download link in incognito browser
+echo 5. Save the URL to src/EngineInstaller/DownloadConfig.txt
+echo.
+echo See DROPBOX_UPLOAD_GUIDE.md for detailed instructions.
 echo.
 
 pause

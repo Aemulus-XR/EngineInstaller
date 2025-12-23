@@ -9,7 +9,7 @@ Instead of packaging 290,000 files directly into an MSI (which is taking 30+ min
 ## User Experience Flow
 
 ```
-1. User downloads: AemulusXR-UE-5.6-Installer.msi (small, ~10MB)
+1. User downloads: UE-5.6-OculusDrop-Installer.msi (small, ~10MB)
 2. User runs installer
 3. Installer shows:
    - Welcome screen
@@ -86,11 +86,11 @@ Instead of packaging 290,000 files directly into an MSI (which is taking 30+ min
 ```
 EngineInstaller/
 ├── src/
-│   ├── AemulusEngineInstaller/      # WiX bootstrapper
+│   ├── EngineInstaller/      # WiX bootstrapper
 │   │   ├── Package.wxs               # Installer definition
 │   │   ├── CustomActions/            # Download & extract logic
 │   │   ├── Resources/                # Embedded 7z.exe, icons
-│   │   └── AemulusEngineInstaller.csproj
+│   │   └── EngineInstaller.csproj
 │   └── ArchiveBuilder/               # Scripts to create & upload 7z
 │       ├── CleanBuild.bat
 │       ├── Create7z.bat

@@ -100,7 +100,7 @@ EngineInstaller/
 │   │   ├── Output/
 │   │   │   └── UE_5.6_OculusDrop.7z # 19GB archive ✅
 │   │   └── README.md
-│   └── AemulusEngineInstaller/
+│   └── EngineInstaller/
 │       ├── Package.wxs            # WiX installer (needs redesign)
 │       └── BuildInstaller.bat
 ├── QUICKSTART.md                  # User guide
