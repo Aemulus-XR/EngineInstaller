@@ -101,6 +101,13 @@ if %ERRORLEVEL% NEQ 0 (
     exit /b 1
 )
 
+REM Delete old archive if it exists
+if exist "%OUTPUT_DIR%\%ARCHIVE_NAME%" (
+    echo Deleting old archive: %OUTPUT_DIR%\%ARCHIVE_NAME%
+    del /f /q "%OUTPUT_DIR%\%ARCHIVE_NAME%"
+    echo.
+)
+
 REM Create archive with maximum compression
 REM -t7z = 7z format
 REM -mx=9 = maximum compression
