@@ -1,0 +1,14 @@
+{
+  "download": {
+    "archiveUrl": "https://www.dropbox.com/scl/fi/g7cekdm09618xw5n0t9a4/UE_5.6_OculusDrop.7z?rlkey=4ujfut10g5s40gbeutt19479c&st=mk2h4yxt&dl=1",
+    "archiveSize": 20401094656,
+    "archiveMD5": ""
+  },
+  "engine": {
+    "version": "5.6.0.0",
+    "editionName": "OculusDrop"
+  },
+  "installation": {
+    "defaultPath": "C:\\Program Files\\Aemulus-XR\\UE_5.6_OculusDrop"
+  }
+}
