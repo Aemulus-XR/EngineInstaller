@@ -53,8 +53,49 @@ This project is developing a WiX-based installer for a custom Unreal Engine buil
   - Samples/
   - Templates/
 
+## Registry Integration (TODO)
+
+### Goals
+1. **Read Epic's default install location** during installer UI to suggest default path
+2. **Register our engine installation** so UE features work without running engine first
+
+### Registry Keys to Research
+- [ ] Where does Epic Games Launcher store default engine install path?
+  - Likely: `HKLM\SOFTWARE\EpicGames\Unreal Engine` or similar
+  - Need to find the key that determines default install location
+
+- [ ] What registry entries does UE create when installed?
+  - Version information
+  - Install location
+  - Engine identifier/GUID
+
+- [ ] What enables UE context menus (.uproject right-click)?
+  - File associations
+  - Shell extensions
+  - Registry entries for installed engines
+
+### Implementation Plan
+1. **During Install** (WiX property):
+   - Read Epic's registry key for default engine location
+   - If found, use as default `INSTALLFOLDER` value
+   - If not found, fall back to `C:\Program Files\Aemulus-XR\UE_5.6_OculusDrop`
+
+2. **After Extraction** (PowerShell script):
+   - Write registry keys to register our engine installation
+   - Format: Similar to how Epic registers engines
+   - Enable context menus and engine discovery
+
+3. **During Uninstall**:
+   - Remove registry entries cleanly
+
+### Research Needed
+- Examine Epic Games Launcher registry entries on a machine with UE installed
+- Check what `UnrealVersionSelector.exe` does for engine registration
+- Test if manual registry entries enable context menus
+
 ## Questions to Resolve
-- [ ] What registry entries are needed? (Engine location, version info)
+- [x] What registry entries are needed? (Documented above - needs research)
+- [ ] What is the exact registry structure UE uses for engine registration?
 
 ## Decisions Made
 - ✓ Install folder will be named `UE_5.6_OculusDrop` (not "Windows")

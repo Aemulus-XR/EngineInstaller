@@ -45,15 +45,14 @@
 
 ✅ **Phase 1 Complete**: Archive Creation
 - Archive built and tested
-- Ready for Dropbox upload
+- Uploaded to Dropbox (19GB)
 - Unreal Engine runs from extracted files
 
-⏸️ **Phase 2 Pending**: Installer Development
-- Need to build lightweight WiX installer that:
-  - Downloads 7z from Dropbox
-  - Extracts to user-selected location
-  - Creates shortcuts
-  - Provides progress UI
+✅ **Phase 2 Nearly Complete**: Installer Development
+- Lightweight WiX installer built (724KB)
+- Downloads from Dropbox successfully
+- **Current issue**: Extraction error fixed (line 79: changed `$msiDir` to `$MSIPath`)
+- Testing extraction phase now
 
 ## Distribution Plan
 
@@ -69,22 +68,67 @@
 3. Replace archive on Dropbox
 4. Notify team
 
+## Key Technical Solutions
+
+### WiX v4 Deferred Custom Action with Parameters
+**Problem**: Deferred custom actions can't access properties like `[INSTALLFOLDER]` directly.
+
+**Solution**: Two-step custom action pattern:
+```xml
+<!-- Step 1: Immediate action sets property with resolved values -->
+<CustomAction
+  Id="SetRunInstallerData"
+  Property="RunInstaller"
+  Value="&quot;[InstallerResourcesFolder]|[INSTALLFOLDER]&quot;"
+  Execute="immediate" />
+
+<!-- Step 2: Deferred action uses the property + Directory attribute -->
+<CustomAction
+  Id="RunInstaller"
+  Directory="InstallerResourcesFolder"
+  ExeCommand='cmd.exe /c "RunInstall.bat [RunInstaller]"'
+  Execute="deferred"
+  Impersonate="yes"
+  Return="check" />
+
+<InstallExecuteSequence>
+  <Custom Action="SetRunInstallerData" After="InstallFiles" />
+  <Custom Action="RunInstaller" After="SetRunInstallerData" />
+</InstallExecuteSequence>
+```
+
+### Pipe-Delimited Parameters
+**Problem**: Spaces in "Program Files" break parameter parsing.
+
+**Solution**: Use pipe delimiter (`|`) for parameter passing:
+- WiX sets: `"D:\path\to\resources|C:\Program Files\Install\Path"`
+- Batch parses: `for /f "tokens=1,2 delims=|" %%a in ("%PARAMS%")`
+
+### Environment Variable Approach
+**Problem**: PowerShell parameters with spaces and special characters.
+
+**Solution**: Set environment variables in batch, read in PowerShell:
+```batch
+set "PS_INSTALL_FOLDER=!INSTALL_FOLDER!"
+set "PS_MSI_PATH=!RESOURCES_FOLDER!"
+powershell.exe ... -Command "& 'script.ps1' -InstallFolder $env:PS_INSTALL_FOLDER -MSIPath $env:PS_MSI_PATH"
+```
+
 ## Next Steps
 
-### Immediate (User Actions)
-1. Upload `UE_5.6_OculusDrop.7z` to Dropbox
-2. Share link and change `?dl=0` to `?dl=1`
-3. Test direct download link
-4. Provide URL for installer configuration
+### Current (Testing Phase)
+1. ✅ Fixed undefined variable error
+2. 🔄 Test extraction with corrected script
+3. Verify complete installation flow
+4. Add temp file cleanup on failure
+5. Add disk space checking
 
-### Next Development Phase
-1. Remove Heat harvesting from WiX project
-2. Add 7z extraction capability
-3. Add download functionality (PowerShell/WiX custom action)
-4. Create progress UI
-5. Integrate Dropbox URL
-6. Test full installation flow
-7. Distribute to team
+### Future Enhancements
+1. Add disk space check before download (~19GB in TEMP + install space)
+2. Add UI option to customize temporary download location
+3. Improve progress UI during download/extraction
+4. Add retry logic for failed downloads
+5. Distribute to team
 
 ## Key Files
 
@@ -119,11 +163,19 @@ EngineInstaller/
 
 ## Issues Resolved
 
+### Archive & Distribution
 1. ✅ Path length issues in batch scripts (relative path counting)
 2. ✅ WiX build taking 30+ minutes (switched to hybrid)
 3. ✅ Long filename issues with ZIP (using 7z instead)
 4. ✅ Google Drive quota concerns (using Dropbox)
 5. ✅ Repository clutter (cleaned with .gitignore)
+
+### Phase 2 Installer Development (Current Session)
+6. ✅ Parameter passing with spaces in paths (solved with pipe delimiter)
+7. ✅ WiX v4 deferred custom action property resolution (immediate action + Directory attribute)
+8. ✅ Batch file not executing (ExeCommand requires Directory, BinaryRef, FileRef, or Property)
+9. ✅ Download functionality (PowerShell Invoke-WebRequest)
+10. ✅ Undefined variable error in Install-Engine.ps1 (line 79: `$msiDir` → `$MSIPath`)
 
 ## Metrics
 

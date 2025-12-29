@@ -1,9 +1,10 @@
 @echo off
+setlocal enabledelayedexpansion
 REM Build script for Unreal Engine Installer
-REM This script builds the WiX installer MSI package
+REM This script builds the lightweight WiX installer MSI package
 
 echo ========================================
-echo UE 5.6 Installer Build Script
+echo UE 5.6 Lightweight Installer Build Script
 echo ========================================
 echo.
 
@@ -13,37 +14,35 @@ set SCRIPT_DIR=%~dp0
 REM Change to the script directory so relative paths work correctly
 cd /d "%SCRIPT_DIR%"
 
-REM Set the source directory (where the engine files are)
-REM Path from EngineInstaller/src/EngineInstaller to UEOculusDrop/LocalBuilds/Engine/Windows
-set SOURCE_DIR=..\..\..\UEOculusDrop\LocalBuilds\Engine\Windows
-
-REM Check if source directory exists
-if not exist "%SOURCE_DIR%" (
-    echo ERROR: Source directory not found: %SOURCE_DIR%
+REM Check if 7za.exe exists
+if not exist "Resources\7za.exe" (
+    echo ERROR: 7za.exe not found in Resources folder
     echo.
-    echo Please run GenerateInstallBuild.bat in UEOculusDrop first.
+    echo Please download 7-Zip Extra from https://www.7-zip.org/download.html
+    echo Extract 7za.exe and place it in: Resources\7za.exe
     echo.
     pause
     exit /b 1
 )
 
-echo Source directory: %SOURCE_DIR%
-echo.
+REM Check if DownloadConfig.json exists
+if not exist "DownloadConfig.json" (
+    echo ERROR: DownloadConfig.json not found
+    echo.
+    echo This file should contain the Dropbox download URL.
+    echo.
+    pause
+    exit /b 1
+)
 
-REM Set the SourceDir variable for WiX
-set SourceDir=%SOURCE_DIR%
-
-echo Building installer...
-echo This will take 5-15 minutes for the full engine build...
+echo Building lightweight installer...
+echo This will take ~10 seconds...
 echo Output will be logged to: build.log
-echo Verbosity: Normal (shows progress)
 echo.
 echo Starting build at %TIME%...
 echo.
 
-REM Build the MSI package with verbose output
-REM -v:n = normal verbosity (shows progress)
-REM Can use -v:d for detailed or -v:diag for diagnostic
+REM Build the MSI package with normal verbosity
 dotnet build -c Release -v:n > build.log 2>&1
 
 REM Also display the log file contents to console
@@ -52,6 +51,7 @@ type build.log
 if %ERRORLEVEL% NEQ 0 (
     echo.
     echo ERROR: Build failed!
+    echo Check build.log for details.
     pause
     exit /b 1
 )
@@ -59,9 +59,20 @@ if %ERRORLEVEL% NEQ 0 (
 echo.
 echo ========================================
 echo Build completed successfully!
-echo.
-echo Output: bin\x64\Release\EngineInstaller.msi
 echo ========================================
+echo.
+
+REM Get MSI size
+for %%A in ("bin\x64\Release\EngineInstaller.msi") do (
+    set SIZE=%%~zA
+    set /a SIZE_MB=!SIZE! / 1048576
+)
+
+echo Output: bin\x64\Release\EngineInstaller.msi
+echo Size: %SIZE_MB% MB
+echo.
+echo The installer will download the engine from Dropbox during installation.
+echo Ready to test!
 echo.
 
 pause

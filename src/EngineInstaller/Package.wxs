@@ -29,24 +29,12 @@
     <!-- Media definition -->
     <Media Id="1" Cabinet="Engine.cab" EmbedCab="yes" />
 
-    <!-- Icon for Add/Remove Programs -->
-    <!-- TODO: Re-enable once file path mapping is working -->
-    <!-- <Icon Id="UnrealEditor.exe" SourceFile="!(bindpath.SourceDir)\Engine\Binaries\Win64\UnrealEditor.exe" /> -->
-    <!-- <Property Id="ARPPRODUCTICON" Value="UnrealEditor.exe" /> -->
-
     <!-- Installation directory structure -->
     <StandardDirectory Id="ProgramFiles64Folder">
       <Directory Id="ManufacturerFolder" Name="Aemulus-XR">
         <Directory Id="INSTALLFOLDER" Name="UE_5.6_OculusDrop">
-          <!-- Engine files will be added here via Heat -->
-          <Directory Id="EngineFolder" Name="Engine">
-            <Directory Id="BinariesFolder" Name="Binaries">
-              <Directory Id="Win64Folder" Name="Win64" />
-            </Directory>
-          </Directory>
-          <Directory Id="FeaturePacksFolder" Name="FeaturePacks" />
-          <Directory Id="SamplesFolder" Name="Samples" />
-          <Directory Id="TemplatesFolder" Name="Templates" />
+          <!-- Temp folder for installer resources -->
+          <Directory Id="InstallerResourcesFolder" Name=".installer" />
         </Directory>
       </Directory>
     </StandardDirectory>
@@ -59,8 +47,19 @@
       <Directory Id="ApplicationProgramsFolder" Name="Unreal Engine 5.6" />
     </StandardDirectory>
 
+    <!-- Installer resources component (temporary files) -->
+    <Component Id="InstallerResources" Directory="InstallerResourcesFolder" Guid="11111111-1111-1111-1111-111111111111">
+      <File Id="SevenZipExe" Source="Resources\7za.exe" KeyPath="yes" />
+      <File Id="InstallScript" Source="Resources\Install-Engine.ps1" />
+      <File Id="RunInstallBat" Source="Resources\RunInstall.bat" />
+      <File Id="DownloadConfigFile" Source="DownloadConfig.json" />
+
+      <!-- Remove this folder after installation -->
+      <RemoveFolder Id="RemoveInstallerResources" On="uninstall" />
+    </Component>
+
     <!-- Main application component -->
-    <Component Id="UnrealEditorShortcuts" Directory="INSTALLFOLDER" Guid="87654321-4321-4321-4321-210987654321">
+    <Component Id="EngineRegistration" Directory="INSTALLFOLDER" Guid="87654321-4321-4321-4321-210987654321">
 
       <!-- Start Menu Shortcut -->
       <Shortcut
@@ -68,7 +67,7 @@
         Directory="ApplicationProgramsFolder"
         Name="Unreal Editor 5.6"
         Description="Unreal Engine 5.6 OculusDrop Edition"
-        Target="[Win64Folder]UnrealEditor.exe"
+        Target="[INSTALLFOLDER]Engine\Binaries\Win64\UnrealEditor.exe"
         WorkingDirectory="INSTALLFOLDER" />
 
       <!-- Desktop Shortcut -->
@@ -77,7 +76,7 @@
         Directory="DesktopFolder"
         Name="Unreal Editor 5.6"
         Description="Unreal Engine 5.6 OculusDrop Edition"
-        Target="[Win64Folder]UnrealEditor.exe"
+        Target="[INSTALLFOLDER]Engine\Binaries\Win64\UnrealEditor.exe"
         WorkingDirectory="INSTALLFOLDER" />
 
       <!-- Required for shortcuts -->
@@ -100,17 +99,38 @@
       <!-- Clean up shortcuts on uninstall -->
       <RemoveFolder Id="RemoveStartMenuFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
       <RemoveFolder Id="RemoveDesktopShortcut" Directory="DesktopFolder" On="uninstall" />
+
+      <!-- Remove installation folder on uninstall -->
+      <RemoveFolder Id="RemoveInstallFolder" Directory="INSTALLFOLDER" On="uninstall" />
     </Component>
 
     <!-- Feature definition -->
     <Feature Id="ProductFeature" Title="Unreal Engine 5.6" Level="1">
-      <ComponentRef Id="UnrealEditorShortcuts" />
-      <!-- Heat-generated component groups -->
-      <ComponentGroupRef Id="EngineComponents" />
-      <ComponentGroupRef Id="FeaturePacksComponents" />
-      <ComponentGroupRef Id="SamplesComponents" />
-      <ComponentGroupRef Id="TemplatesComponents" />
+      <ComponentRef Id="InstallerResources" />
+      <ComponentRef Id="EngineRegistration" />
     </Feature>
+
+    <!-- Custom Action: Set CustomActionData for deferred action -->
+    <CustomAction
+      Id="SetRunInstallerData"
+      Property="RunInstaller"
+      Value="&quot;[InstallerResourcesFolder]|[INSTALLFOLDER]&quot;"
+      Execute="immediate" />
+
+    <!-- Custom Action: Run installation script via batch file (deferred) -->
+    <CustomAction
+      Id="RunInstaller"
+      Directory="InstallerResourcesFolder"
+      ExeCommand='cmd.exe /c "RunInstall.bat [RunInstaller]"'
+      Execute="deferred"
+      Impersonate="yes"
+      Return="check" />
+
+    <!-- Installation sequence -->
+    <InstallExecuteSequence>
+      <Custom Action="SetRunInstallerData" After="InstallFiles" Condition="NOT Installed" />
+      <Custom Action="RunInstaller" After="SetRunInstallerData" Condition="NOT Installed" />
+    </InstallExecuteSequence>
 
     <!-- UI Definition -->
     <ui:WixUI Id="WixUI_InstallDir" />
