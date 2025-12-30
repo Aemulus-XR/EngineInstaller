@@ -50,14 +50,48 @@ echo Step 1: Cleaning engine folder...
 echo ----------------------------------------
 echo Removing temporary and cache files...
 echo.
+echo NOTE: Preserving Engine\Intermediate\Build\BuildRules (required for UBT)
+echo.
 
-set FOLDERS_TO_DELETE=Intermediate DerivedDataCache Saved\Logs Saved\Crashes
+REM Delete most folders completely
+set FOLDERS_TO_DELETE=DerivedDataCache Saved\Logs Saved\Crashes
 
 for %%F in (%FOLDERS_TO_DELETE%) do (
     if exist "%ENGINE_SOURCE%\Engine\%%F" (
         echo   Deleting Engine\%%F...
         rd /s /q "%ENGINE_SOURCE%\Engine\%%F" 2>nul
     )
+)
+
+REM For Intermediate, we need to be selective - keep BuildRules
+if exist "%ENGINE_SOURCE%\Engine\Intermediate" (
+    echo   Cleaning Engine\Intermediate (selective)...
+
+    REM Delete everything EXCEPT Build\BuildRules
+    for /d %%D in ("%ENGINE_SOURCE%\Engine\Intermediate\*") do (
+        if /i not "%%~nxD"=="Build" (
+            echo     Deleting Intermediate\%%~nxD...
+            rd /s /q "%%D" 2>nul
+        )
+    )
+
+    REM In the Build folder, delete everything except BuildRules
+    if exist "%ENGINE_SOURCE%\Engine\Intermediate\Build" (
+        for /d %%D in ("%ENGINE_SOURCE%\Engine\Intermediate\Build\*") do (
+            if /i not "%%~nxD"=="BuildRules" (
+                echo     Deleting Intermediate\Build\%%~nxD...
+                rd /s /q "%%D" 2>nul
+            )
+        )
+
+        REM Also delete any files in Build folder (keep only BuildRules subfolder)
+        for %%F in ("%ENGINE_SOURCE%\Engine\Intermediate\Build\*.*") do (
+            echo     Deleting Intermediate\Build\%%~nxF...
+            del /f /q "%%F" 2>nul
+        )
+    )
+
+    echo   Kept: Engine\Intermediate\Build\BuildRules
 )
 
 REM Also clean Intermediate from Templates and Samples

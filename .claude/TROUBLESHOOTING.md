@@ -238,6 +238,39 @@ $extractArgs = @("x", "`"$archivePath`"", "-o`"$InstallFolder`"", "-y")
 
 **TODO**: Implement after verifying basic extraction works.
 
+## Critical Engine Folders
+
+### Engine/Intermediate/Build/BuildRules
+**MUST BE INCLUDED** in the archive!
+
+**Error if missing**:
+```
+Precompiled rules assembly 'D:\bin\UE_5.6_OculusDrop\Engine\Intermediate\Build\BuildRules\UE5Rules.dll' does not exist.
+```
+
+**What it contains**:
+- `UE5Rules.dll` - Precompiled UnrealBuildTool rules
+- Required for generating project files and building
+- Without it, users cannot open .uproject files or generate VS Code projects
+
+**Archive creation**:
+The `CreateEngineArchive.bat` script now:
+1. Deletes `Engine/Intermediate/*` (temp files)
+2. **EXCEPT** `Engine/Intermediate/Build/BuildRules/` (keeps this)
+3. Saves ~5-10GB by removing temp files while preserving critical build files
+
+**Verification**:
+After creating archive, check that BuildRules is included:
+```cmd
+7z l Output\UE_5.6_OculusDrop.7z | findstr /i "BuildRules"
+```
+
+Should show files like:
+```
+Engine\Intermediate\Build\BuildRules\UE5Rules.dll
+Engine\Intermediate\Build\BuildRules\UE5Rules.pdb
+```
+
 ## Registry Research
 
 ### Finding Unreal Engine Registry Keys
