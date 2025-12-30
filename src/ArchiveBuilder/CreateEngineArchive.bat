@@ -65,7 +65,7 @@ for %%F in (%FOLDERS_TO_DELETE%) do (
 
 REM For Intermediate, we need to be selective - keep BuildRules
 if exist "%ENGINE_SOURCE%\Engine\Intermediate" (
-    echo   Cleaning Engine\Intermediate (selective)...
+    echo   Cleaning Engine\Intermediate ^(selective^)...
 
     REM Delete everything EXCEPT Build\BuildRules
     for /d %%D in ("%ENGINE_SOURCE%\Engine\Intermediate\*") do (
