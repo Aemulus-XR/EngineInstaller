@@ -82,9 +82,14 @@ try {
     }
 
     Write-Log "Extracting archive to: $InstallFolder"
-    Write-Log "This will take 5-15 minutes..."
+    Write-Log "This will take 3-5 minutes with multi-threading..."
 
-    $extractArgs = @("x", "`"$archivePath`"", "-o`"$InstallFolder`"", "-y")
+    # Get CPU core count for optimal multi-threading
+    $coreCount = (Get-WmiObject Win32_ComputerSystem).NumberOfLogicalProcessors
+    Write-Log "Using $coreCount CPU threads for extraction"
+
+    # Enable multi-threading and progress reporting for faster extraction
+    $extractArgs = @("x", "`"$archivePath`"", "-o`"$InstallFolder`"", "-y", "-mmt=$coreCount", "-bsp1")
     $process = Start-Process -FilePath $sevenZipPath -ArgumentList $extractArgs -Wait -PassThru -NoNewWindow
 
     if ($process.ExitCode -ne 0) {
